@@ -6,6 +6,8 @@
 	
 	<persistence-unit name="java-maven-hibernate">
 		<class>com.leo.hibernate.model.UsuarioPessoa</class>
+		<class>com.leo.hibernate.model.UsuarioTelefone</class>
+		
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/posjavahibernate" />
