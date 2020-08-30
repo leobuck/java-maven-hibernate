@@ -25,7 +25,55 @@ public class TesteHibernate {
 		usuarioPessoa.setEmail("teste@email.com");
 		usuarioPessoa.setIdade(22);
 		
-		daoGeneric.Salvar(usuarioPessoa);
+		daoGeneric.salvar(usuarioPessoa);
+	}
+	
+	@Test
+	public void testePesquisar() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa usuarioPessoa = new UsuarioPessoa();
+		
+		usuarioPessoa.setId(1L);
+		
+		usuarioPessoa = daoGeneric.pesquisar(usuarioPessoa);
+		
+		System.out.println(usuarioPessoa);
+	}
+	
+	@Test
+	public void testePesquisarPeloId() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		
+		System.out.println(usuarioPessoa);
+	}
+	
+	@Test
+	public void testeAtualizar() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		
+		usuarioPessoa.setIdade(99);
+		usuarioPessoa.setNome("Nome atualizado");
+		usuarioPessoa.setSenha("senha atualizada");
+		
+		usuarioPessoa = daoGeneric.updateMerge(usuarioPessoa);
+		
+		System.out.println(usuarioPessoa);
+	}
+	
+	@Test
+	public void testeDeletar() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(4L, UsuarioPessoa.class);
+		
+		daoGeneric.deletar(usuarioPessoa);
+		
+		System.out.println(usuarioPessoa);
 	}
 	
 }
