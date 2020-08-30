@@ -90,4 +90,16 @@ public class TesteHibernate {
 		
 	}
 	
+	@Test
+	public void testeQueryList() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		List<UsuarioPessoa> usuarioPessoas = daoGeneric.getEntityManager().createQuery("FROM UsuarioPessoa WHERE nome = 'Teste'").getResultList();
+		
+		for (UsuarioPessoa usuarioPessoa : usuarioPessoas) {
+			System.out.println(usuarioPessoa);
+		}
+		
+	}
+	
 }
