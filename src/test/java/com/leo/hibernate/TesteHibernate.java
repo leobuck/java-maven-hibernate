@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import com.leo.hibernate.dao.DaoGeneric;
 import com.leo.hibernate.model.UsuarioPessoa;
+import com.leo.hibernate.model.UsuarioTelefone;
 
 public class TesteHibernate {
 
@@ -168,6 +169,38 @@ public class TesteHibernate {
 		
 		for (UsuarioPessoa usuarioPessoa : usuarioPessoas) {
 			System.out.println(usuarioPessoa);
+		}
+	}
+	
+	@Test
+	public void testeGravarTelefone() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+		
+		UsuarioPessoa usuarioPessoa = (UsuarioPessoa) daoGeneric.pesquisar(6L, UsuarioPessoa.class);
+		
+		UsuarioTelefone telefone1 = new UsuarioTelefone();
+		telefone1.setTipo("Celular");
+		telefone1.setNumero("(19) 99999-9999");
+		telefone1.setUsuarioPessoa(usuarioPessoa);
+		
+		daoGeneric.salvar(telefone1);
+		
+		UsuarioTelefone telefone2 = new UsuarioTelefone();
+		telefone2.setTipo("Residencial");
+		telefone2.setNumero("(19) 3455-0101");
+		telefone2.setUsuarioPessoa(usuarioPessoa);
+		
+		daoGeneric.salvar(telefone2);
+	}
+	
+	@Test
+	public void testeConsultarTelefone() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+		
+		UsuarioPessoa usuarioPessoa = (UsuarioPessoa) daoGeneric.pesquisar(6L, UsuarioPessoa.class);
+		
+		for (UsuarioTelefone usuarioTelefone : usuarioPessoa.getTelefones()) {
+			System.out.println(usuarioTelefone);
 		}
 	}
 	

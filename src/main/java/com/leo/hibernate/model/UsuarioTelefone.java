@@ -55,5 +55,11 @@ public class UsuarioTelefone {
 	public void setUsuarioPessoa(UsuarioPessoa usuarioPessoa) {
 		this.usuarioPessoa = usuarioPessoa;
 	}
+
+	@Override
+	public String toString() {
+		return "UsuarioTelefone [id=" + id + ", tipo=" + tipo + ", numero=" + numero + ", usuarioPessoa="
+				+ usuarioPessoa + "]";
+	}
 	
 }
