@@ -1,5 +1,7 @@
 package com.leo.hibernate;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.leo.hibernate.dao.DaoGeneric;
@@ -54,7 +56,7 @@ public class TesteHibernate {
 	public void testeAtualizar() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
 		
-		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(2L, UsuarioPessoa.class);
 		
 		usuarioPessoa.setIdade(99);
 		usuarioPessoa.setNome("Nome atualizado");
@@ -74,6 +76,18 @@ public class TesteHibernate {
 		daoGeneric.deletar(usuarioPessoa);
 		
 		System.out.println(usuarioPessoa);
+	}
+	
+	@Test
+	public void testeListar() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		List<UsuarioPessoa> usuarioPessoas = daoGeneric.listar(UsuarioPessoa.class);
+		
+		for (UsuarioPessoa usuarioPessoa : usuarioPessoas) {
+			System.out.println(usuarioPessoa);
+		}
+		
 	}
 	
 }

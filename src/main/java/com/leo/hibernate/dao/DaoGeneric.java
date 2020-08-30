@@ -1,5 +1,7 @@
 package com.leo.hibernate.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -57,6 +59,18 @@ public class DaoGeneric<E> {
 			.executeUpdate();
 		
 		transaction.commit();
+	}
+	
+	public List<E> listar(Class<E> entidade) {
+		EntityTransaction transaction = entityManager.getTransaction();
+		
+		transaction.begin();
+		
+		List<E> lista = entityManager.createQuery("FROM " + entidade.getName()).getResultList();
+		
+		transaction.commit();
+		
+		return lista;
 	}
 	
 }
