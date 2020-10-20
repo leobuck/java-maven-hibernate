@@ -21,6 +21,7 @@ public class DaoGeneric<E> {
 		transaction.commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public E pesquisar(E entidade) {
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		
@@ -61,6 +62,7 @@ public class DaoGeneric<E> {
 		transaction.commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<E> listar(Class<E> entidade) {
 		EntityTransaction transaction = entityManager.getTransaction();
 		

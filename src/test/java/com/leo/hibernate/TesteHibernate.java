@@ -91,6 +91,7 @@ public class TesteHibernate {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testeQueryList() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
@@ -103,6 +104,7 @@ public class TesteHibernate {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testeQueryListMaxResult() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
@@ -118,6 +120,7 @@ public class TesteHibernate {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testeQueryListParameter() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
@@ -145,6 +148,7 @@ public class TesteHibernate {
 		System.out.println("A soma de todas as idades dos usuários é: " + somaIdade);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testeNamedQuery1() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
@@ -158,6 +162,7 @@ public class TesteHibernate {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testeNamedQuery2() {
 		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
@@ -172,6 +177,7 @@ public class TesteHibernate {
 		}
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
 	public void testeGravarTelefone() {
 		DaoGeneric daoGeneric = new DaoGeneric();
@@ -193,6 +199,7 @@ public class TesteHibernate {
 		daoGeneric.salvar(telefone2);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
 	public void testeConsultarTelefone() {
 		DaoGeneric daoGeneric = new DaoGeneric();
