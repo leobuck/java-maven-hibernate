@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<title>Index</title>
@@ -13,17 +14,17 @@
 		<h:link value="Página PrimeFaces" outcome="primefaces.jsf" />
 		<br /><br />
 	
-		<h:form>
-			<h:messages showDetail="true" showSummary="false" />
+		<h:form id="formulario">
+			<h:messages showDetail="true" showSummary="false" id="msg" />
 			<h:panelGrid columns="2">
 				<h:outputLabel>Id:</h:outputLabel>
 				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.id}" readonly="true" />
 				
 				<h:outputLabel>Nome:</h:outputLabel>
-				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.nome}" required="true" requiredMessage="Informe o nome!" />
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.nome}" required="true" requiredMessage="Informe o nome!" pt:placeholder="Informe o nome" />
 				
 				<h:outputLabel>Sobrenome:</h:outputLabel>
-				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Informe o sobrenome!" />
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.sobrenome}" required="true" requiredMessage="Informe o sobrenome!" pt:placeholder="Informe o sobrenome" />
 				
 				<h:outputLabel>Email:</h:outputLabel>
 				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.email}" />
@@ -37,6 +38,26 @@
 					<f:selectItem itemValue="MASCULINO" />					
 				</h:selectOneMenu>
 				
+				<h:outputLabel>CEP:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.cep}">
+					<f:ajax event="blur" execute="@this" listener="#{usuarioPessoaBean.pesquisaCep}" render="logradouro complemento bairro localidade uf" />
+				</h:inputText>
+				
+				<h:outputLabel>Logradouro:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.logradouro}" id="logradouro" />
+				
+				<h:outputLabel>Complemento:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.complemento}" id="complemento" />
+				
+				<h:outputLabel>Bairro:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.bairro}" id="bairro" />
+				
+				<h:outputLabel>Cidade:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.localidade}" id="localidade" />
+				
+				<h:outputLabel>UF:</h:outputLabel>
+				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.uf}" id="uf" />
+				
 				<h:outputLabel>Login:</h:outputLabel>
 				<h:inputText value="#{usuarioPessoaBean.usuarioPessoa.login}" />
 				
@@ -47,6 +68,8 @@
 			<h:commandButton value="Novo" action="#{usuarioPessoaBean.novo}" immediate="true" />
 			<h:commandButton value="Salvar" action="#{usuarioPessoaBean.salvar}" />
 			<br /><br />
+		</h:form>
+		<h:form id="formtable">
 			<h:dataTable value="#{usuarioPessoaBean.list}" var="user" cellpadding="5" border="1">
 				<f:facet name="header">Lista de usuários</f:facet>
 				<h:column>
@@ -78,12 +101,18 @@
 					<h:commandLink immediate="true" id="editar">
 						<h:graphicImage url="resources/img/editar.png" />
 						<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaBean.usuarioPessoa}" />
-						<f:ajax execute="editar" render="@form"/>
+						<f:ajax execute="editar" render=":formulario"/>
 					</h:commandLink>
 					&nbsp;
-					<h:commandLink action="#{usuarioPessoaBean.remover}" immediate="true">
+					<h:commandLink action="#{usuarioPessoaBean.remover}" immediate="true" id="remover" >
 						<h:graphicImage url="resources/img/excluir.png" />
 						<f:setPropertyActionListener value="#{user}" target="#{usuarioPessoaBean.usuarioPessoa}" />
+						<f:ajax execute="editar" render="@form :formulario:msg"/>
+					</h:commandLink>
+					&nbsp;
+					<h:commandLink action="telefone.jsf" immediate="true" id="telefones" >
+						<h:graphicImage url="resources/img/telefone.png" />
+						<f:param name="idusuario" value="#{user.id}" />
 					</h:commandLink>
 				</h:column>
 			</h:dataTable>

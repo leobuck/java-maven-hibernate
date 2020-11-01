@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Index</title>
+	</h:head>
+	<h:body>
+		<h:link value="Página JSF" outcome="index.jsf" />
+		&nbsp;
+		<h:link value="Página PrimeFaces" outcome="primefaces.jsf" />
+		<br /><br />
+	
+		<h:form id="formulario">
+			<h:messages showDetail="true" showSummary="false" id="msg" />
+			
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Usuário:" for="usuario" />
+				<h:outputText value="#{usuarioTelefoneBean.usuario.nome}" id="usuario" />
+				
+				<h:outputLabel value="Número:" for="numero" />
+				<h:inputText value="#{usuarioTelefoneBean.telefone.numero}" id="numero"/>
+				
+				<h:outputLabel value="Tipo:" for="tipo" />
+				<h:inputText value="#{usuarioTelefoneBean.telefone.tipo}" id="tipo"/>
+			</h:panelGrid>
+			<br />
+			<h:commandButton value="Novo" action="#{usuarioTelefoneBean.novo}" immediate="true" />
+			<h:commandButton value="Salvar" action="#{usuarioTelefoneBean.salvar}" />
+			<br /><br />
+		</h:form>
+		
+		<h:form id="formtable">
+			<h:dataTable value="#{usuarioTelefoneBean.listaTelefone}" var="fone" cellpadding="5" border="1">
+				<f:facet name="header">Lista de telefones</f:facet>
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{fone.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Tipo</f:facet>
+					<h:outputText value="#{fone.tipo}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Número</f:facet>
+					<h:outputText value="#{fone.numero}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{usuarioTelefoneBean.removerTelefone}" immediate="true" id="remover" >
+						<h:graphicImage url="resources/img/excluir.png" />
+						<f:setPropertyActionListener value="#{fone}" target="#{usuarioTelefoneBean.telefone}" />
+						<f:ajax execute="editar" render="@form :formulario:msg"/>
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</h:body>
+</html>

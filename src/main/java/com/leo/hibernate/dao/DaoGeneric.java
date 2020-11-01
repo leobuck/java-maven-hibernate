@@ -48,7 +48,7 @@ public class DaoGeneric<E> {
 		return entidadeSalva;
 	}
 	
-	public void deletar(E entidade) {
+	public void deletar(E entidade) throws Exception {
 		Object id = HibernateUtil.getPrimaryKey(entidade);
 		
 		EntityTransaction transaction = entityManager.getTransaction();

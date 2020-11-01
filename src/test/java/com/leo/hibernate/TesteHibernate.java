@@ -74,7 +74,11 @@ public class TesteHibernate {
 		
 		UsuarioPessoa usuarioPessoa = daoGeneric.pesquisar(4L, UsuarioPessoa.class);
 		
-		daoGeneric.deletar(usuarioPessoa);
+		try {
+			daoGeneric.deletar(usuarioPessoa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println(usuarioPessoa);
 	}
@@ -182,7 +186,7 @@ public class TesteHibernate {
 	public void testeGravarTelefone() {
 		DaoGeneric daoGeneric = new DaoGeneric();
 		
-		UsuarioPessoa usuarioPessoa = (UsuarioPessoa) daoGeneric.pesquisar(6L, UsuarioPessoa.class);
+		UsuarioPessoa usuarioPessoa = (UsuarioPessoa) daoGeneric.pesquisar(1L, UsuarioPessoa.class);
 		
 		UsuarioTelefone telefone1 = new UsuarioTelefone();
 		telefone1.setTipo("Celular");
