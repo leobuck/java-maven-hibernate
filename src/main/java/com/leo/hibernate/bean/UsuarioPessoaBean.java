@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.hibernate.exception.ConstraintViolationException;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 import com.google.gson.Gson;
 import com.leo.hibernate.dao.UsuarioDao;
@@ -28,10 +30,18 @@ public class UsuarioPessoaBean {
 	private UsuarioPessoa usuarioPessoa = new UsuarioPessoa();
 	private List<UsuarioPessoa> list = new ArrayList<>();
 	private UsuarioDao usuarioDao = new UsuarioDao();
+	private BarChartModel barChartModel = new BarChartModel();
 	
 	@PostConstruct
 	public void init() {
 		list = usuarioDao.listar(UsuarioPessoa.class);
+		
+		ChartSeries usuarioSalario = new ChartSeries();
+		for (UsuarioPessoa usuario : list) {
+			usuarioSalario.set(usuario.getNome(), usuario.getSalario());
+		}
+		barChartModel.addSeries(usuarioSalario);
+		barChartModel.setTitle("Gráfico de Salário dos Usuários");
 	}
 	
 	public String salvar() {
@@ -103,6 +113,14 @@ public class UsuarioPessoaBean {
 	public List<UsuarioPessoa> getList() {
 		list = usuarioDao.listar(UsuarioPessoa.class);
 		return list;
+	}
+
+	public BarChartModel getBarChartModel() {
+		return barChartModel;
+	}
+
+	public void setBarChartModel(BarChartModel barChartModel) {
+		this.barChartModel = barChartModel;
 	}
 	
 }

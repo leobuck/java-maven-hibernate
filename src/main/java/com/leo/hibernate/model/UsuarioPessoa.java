@@ -48,6 +48,8 @@ public class UsuarioPessoa {
 	
 	private String uf;
 	
+	private double salario;
+	
 	@OneToMany(mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)
 	private List<UsuarioTelefone> telefones;
 
@@ -161,6 +163,14 @@ public class UsuarioPessoa {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(double salario) {
+		this.salario = salario;
 	}
 
 	public List<UsuarioTelefone> getTelefones() {
