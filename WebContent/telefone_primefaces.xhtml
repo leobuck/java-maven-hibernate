@@ -25,10 +25,14 @@
 				<h:outputText value="#{usuarioTelefoneBean.usuario.nome}" id="usuario" />
 				
 				<p:outputLabel value="Número:" for="numero" />
-				<p:inputText value="#{usuarioTelefoneBean.telefone.numero}" id="numero" required="true" requiredMessage="Informe o número!" />
+				<p:inputMask value="#{usuarioTelefoneBean.telefone.numero}" id="numero" required="true" requiredMessage="Informe o número!" mask="(99) 99999-9999" />
 				
 				<p:outputLabel value="Tipo:" for="tipo" />
-				<p:inputText value="#{usuarioTelefoneBean.telefone.tipo}" id="tipo" required="true" requiredMessage="Informe o tipo!" />
+				<p:selectOneMenu value="#{usuarioTelefoneBean.telefone.tipo}" id="tipo" required="true" requiredMessage="Informe o tipo!">
+					<f:selectItem itemValue="RESIDENCIAL" itemLabel="Residencial"></f:selectItem>
+					<f:selectItem itemValue="CELULAR" itemLabel="Celular"></f:selectItem>
+					<f:selectItem itemValue="COMERCIAL" itemLabel="Comercial"></f:selectItem>
+				</p:selectOneMenu>
 			</p:panelGrid>
 			<br />
 			<p:commandButton value="Novo" action="#{usuarioTelefoneBean.novo}" immediate="true" />
